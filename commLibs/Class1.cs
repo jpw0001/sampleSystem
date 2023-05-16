@@ -9,10 +9,12 @@ namespace commLibs
         public IProducer<Null, string> pb;
         protected string _servers { get; set; }
         protected string _topic { get; set; }
-        public Messaging(string topic, string servers)
+        protected string _consumerGroup { get; set; } = string.Empty;
+        public Messaging(string topic, string servers, string consumerGroup)
         {
             this._servers = servers;
             this._topic = topic;
+            this._consumerGroup = consumerGroup;
             pb = new ProducerBuilder<Null, string>(new ProducerConfig { BootstrapServers = _servers }).Build();
         }
         public void SendMessage(string value) => SendMessage(value, _topic);
@@ -28,9 +30,7 @@ namespace commLibs
             try
             {
                 var dr = await pb.ProduceAsync(topic, new Message<Null, string> { Value=value });
-                string temp = dr.TopicPartitionOffset.ToString();
-                SentMessage(value, temp);
-                //Console.WriteLine($"Delivered '{dr.Value}' to '{dr.TopicPartitionOffset}'");
+                SentMessage(value, dr.TopicPartitionOffset.ToString());
             }
             catch (ProduceException<Null, string> e)
             {
@@ -47,7 +47,7 @@ namespace commLibs
         {
             var conf = new ConsumerConfig
             {
-                GroupId = "test-consumer-group",
+                GroupId = _consumerGroup,
                 BootstrapServers = _servers,
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };

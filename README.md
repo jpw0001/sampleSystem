@@ -1,5 +1,6 @@
 # sampleSystem #
 Sample set of nodes to read and write messages to a kafka topic
+Create small simple communications lib. Hooks are from the consume message.
 
 Steps:
 1. open Terminal
