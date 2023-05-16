@@ -26,7 +26,6 @@ namespace commLibs
 
         public async void SendMessage( string value, string topic )
         {
-
             try
             {
                 var dr = await pb.ProduceAsync(topic, new Message<Null, string> { Value=value });
