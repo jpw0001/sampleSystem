@@ -6,7 +6,7 @@ using commLibs;
 
 public class Node : Messaging
 {
-    public Node(string topic, string servers) : base(topic, servers)
+    public Node(string topic, string servers, string group) : base(topic, servers, group)
     {
     }
 
@@ -28,7 +28,7 @@ class Program
 {
     public static void Main(string[] args)
     {
-        Node m = new Node("quickstart", "127.0.0.1:9092");
+        Node m = new Node("quickstart", "127.0.0.1:9092", "1");
         m.ConsumeMessage();
     }
 }
