@@ -18,10 +18,10 @@ public class Node : Messaging
             SendMessage("grape");
         }
     }
-       public override void SentMessage(string value, string topicPartitionOffset)
-       {
+    public override void SentMessage(string value, string topicPartitionOffset)
+    {
             Console.WriteLine($"Delivered '{value}'");
-       }
+    }
 }
 
 class Program
