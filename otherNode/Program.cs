@@ -4,9 +4,9 @@ using System.Threading;
 
 using commLibs;
 
-public class Node : Messaging
+public class OtherNode : Messaging
 {
-    public Node(string topic, string servers, string group) : base(topic, servers, group)
+    public OtherNode(string topic, string servers, string group) : base(topic, servers, group)
     {
     }
 
@@ -20,7 +20,7 @@ public class Node : Messaging
     }
     public override void SentMessage(string value, string topicPartitionOffset)
     {
-            Console.WriteLine($"Delivered '{value}'");
+        Console.WriteLine($"Delivered '{value}'");
     }
 }
 
@@ -28,7 +28,7 @@ class Program
 {
     public static void Main(string[] args)
     {
-        Node m = new Node("quickstart", "127.0.0.1:9092","2");
+        OtherNode m = new OtherNode("quickstart", "127.0.0.1:9092", "2");
         m.ConsumeMessage();
     }
 }

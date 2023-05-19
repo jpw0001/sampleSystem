@@ -4,9 +4,9 @@ using System.Threading;
 
 using commLibs;
 
-public class Node : Messaging
+public class SampleNode : Messaging
 {
-    public Node(string topic, string servers, string group) : base(topic, servers, group)
+    public SampleNode(string topic, string servers, string group) : base(topic, servers, group)
     {
     }
 
@@ -18,17 +18,17 @@ public class Node : Messaging
             SendMessage("orange");
         }
     }
-       public override void SentMessage(string value, string topicPartitionOffset)
-       {
-            Console.WriteLine($"Delivered '{value}'");
-       }
+    public override void SentMessage(string value, string topicPartitionOffset)
+    {
+        Console.WriteLine($"Delivered '{value}'");
+    }
 }
 
 class Program
 {
     public static void Main(string[] args)
     {
-        Node m = new Node("quickstart", "127.0.0.1:9092", "1");
+        SampleNode m = new SampleNode("quickstart", "127.0.0.1:9092", "1");
         m.ConsumeMessage();
     }
 }
